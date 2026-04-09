@@ -1,40 +1,68 @@
-import { $ } from '@wdio/globals'
-import Page from './page.js';
+class LoginPage {
 
-/**
- * sub page containing specific selectors and methods for a specific page
- */
-class LoginPage extends Page {
-    /**
-     * define selectors using getter methods
-     */
-    public get inputUsername () {
-        return $('#username');
+    // Open website
+    async open() {
+        await browser.url("https://automationexercise.com/");
     }
 
-    public get inputPassword () {
-        return $('#password');
+    // Elements
+    get homeLogo() {
+        return $("//img[@src='/static/images/home/logo.png']");
     }
 
-    public get btnSubmit () {
-        return $('button[type="submit"]');
+    get loginLink() {
+        return $("//a[@href='/login']");
     }
 
-    /**
-     * a method to encapsule automation code to interact with the page
-     * e.g. to login using username and password
-     */
-    public async login (username: string, password: string) {
-        await this.inputUsername.setValue(username);
-        await this.inputPassword.setValue(password);
-        await this.btnSubmit.click();
+    get loginHeader() {
+        return $("//h2[text()='Login to your account']");
     }
 
-    /**
-     * overwrite specific options to adapt it to page object
-     */
-    public open () {
-        return super.open('login');
+    get emailInput() {
+        return $("//input[@data-qa='login-email']");
+    }
+
+    get passwordInput() {
+        return $("//input[@data-qa='login-password']");
+    }
+
+    get loginButton() {
+        return $("//button[@data-qa='login-button']");
+    }
+
+    get loggedInText() {
+        return $("//a[contains(., 'Logged in as')]");
+    }
+
+    get userIcon() {
+        return $("//i[@class='fa fa-user']");
+    }
+
+    get deleteButton() {
+        return $("//a[@href='/delete_account']");
+    }
+
+    get deletedMessage() {
+        return $("//b[text()='Account Deleted!']");
+    }
+
+    get continueButton() {
+        return $("//a[@data-qa='continue-button']");
+    }
+
+    // Actions 
+
+    async login(email: string, password: string) {
+        await this.emailInput.waitForDisplayed();
+        await this.emailInput.setValue(email);
+
+        await this.passwordInput.setValue(password);
+        await this.loginButton.click();
+    }
+
+    async deleteAccount() {
+        await this.deleteButton.waitForClickable({ timeout: 10000 });
+        await this.deleteButton.click();
     }
 }
 
