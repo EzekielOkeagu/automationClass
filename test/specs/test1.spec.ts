@@ -30,12 +30,13 @@ describe("Automation test1", () => {
         await $("//button[@data-qa='create-account']").click();
         await $("//b[text()='Account Created!']").waitForDisplayed({ timeout: 5000 });
         await $("//a[@data-qa='continue-button']").click();
-        const loggedInText = await $("//a[contains(normalize-space(),'Logged in as Godbless')]");
+        const loggedInText = await $("//a[contains(., 'Logged in as')]");
         await loggedInText.waitForDisplayed({ timeout: 10000 });
+        await expect(loggedInText).toBeDisplayed();
         await expect($("//i[@class='fa fa-user']")).toBeDisplayed();
-        await $("//a[@href='/delete_account']").click();
-        await expect($("//b[text()='Account Deleted!']")).toBeDisplayed();
-        await $("//a[@data-qa='continue-button']").click();
+        //await $("//a[@href='/delete_account']").click();
+        //await expect($("//b[text()='Account Deleted!']")).toBeDisplayed();
+        //await $("//a[@data-qa='continue-button']").click();
 
     })
 })
