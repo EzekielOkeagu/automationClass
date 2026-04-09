@@ -1,10 +1,5 @@
 class LoginPage {
 
-    // Open website
-    async open() {
-        await browser.url("https://automationexercise.com/");
-    }
-
     // Elements
     get homeLogo() {
         return $("//img[@src='/static/images/home/logo.png']");
@@ -51,6 +46,10 @@ class LoginPage {
     }
 
     // Actions 
+    
+    async open() {
+        await browser.url("https://automationexercise.com/");
+    }
 
     async login(email: string, password: string) {
         await this.emailInput.waitForDisplayed();

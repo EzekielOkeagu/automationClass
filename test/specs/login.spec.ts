@@ -13,7 +13,7 @@ describe("Login Test", () => {
         await expect(LoginPage.homeLogo).toBeDisplayed();
 
         // Click login
-        await LoginPage.loginLink.click();
+        await LoginPage.loginBtn();
 
         // Confirm login page
         await LoginPage.loginHeader.waitForDisplayed({ timeout: 10000 });
