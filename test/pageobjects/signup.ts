@@ -1,6 +1,8 @@
 //import { count } from "node:console"
 
 class SignupPage {
+
+    //const email = `franc ${(Math.floor(Math.random())* 1000)}@gmail.com`;
     // home page elements
     get homeLogo() {
         return $("//img[@src='/static/images/home/logo.png']")
@@ -100,7 +102,7 @@ class SignupPage {
     async clickLoginBtn(){
         await this.loginLink.click();
     }
-
+    
     async fillSignupForm(name: string, email: string){
         await this.signupNameInput.setValue(name)
         await this.signupEmailInput.setValue(email)
